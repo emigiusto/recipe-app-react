@@ -11,16 +11,12 @@ function App() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("chicken")
 
-  useEffect(()=>{ //Run everytime something re-renders
-    getRecipes();
-  },[query]); //Runs everytime whatever is in the array changes
-
-  //Fetch API
-  const getRecipes = async () => {
+  useEffect(()=>{
+    //Fetch API
     const response = await fetch("https://api.edamam.com/search?q="+ query + "&app_id=" + APP_ID +"&app_key="+ APP_KEY)
     const data = await response.json();
     setRecipes(data.hits);
-  }
+  },[query]); //Runs everytime whatever is in the array changes
 
   const updateSearch = e => {
     setSearch(e.target.value); //updates state everytime the onChange event triggers
